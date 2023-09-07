@@ -1,0 +1,14 @@
+require('dotenv').config()
+const path = require('path')
+
+let folderPath = 'src/drivers/sequelize'
+if (process.env.SQL_MIGRATION_MODE === 'MIGRATOR') {
+  folderPath = 'dist/src/drivers/sequelize'
+}
+
+module.exports = {
+  config: path.resolve(folderPath, 'database.ts'),
+  'seeders-path': path.resolve(folderPath, 'seeders'),
+  'migrations-path': path.resolve(folderPath, 'migrations'),
+  'models-path': path.resolve(folderPath, 'models'),
+}
