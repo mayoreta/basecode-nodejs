@@ -1,6 +1,6 @@
 {
   "root": true,
-  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "plugins": ["@typescript-eslint", "import", "prettier", "unused-imports"],
   "extends": [
     "airbnb-typescript/base",
     "prettier",
@@ -13,9 +13,19 @@
   },
   "rules": {
     "@typescript-eslint/no-var-requires": 0,
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/lines-between-class-members": 0
+    "@typescript-eslint/lines-between-class-members": 0,
+    "unused-imports/no-unused-imports": "error",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ]
   }
 }
