@@ -22,7 +22,7 @@ class Login {
   async login(params: ParamsLogin): Promise<ResultLogin> {
     const user = await this.userRepository.findByUsername(params.username)
 
-    if (Object.keys(user).length === 0) {
+    if (!user) {
       throw new Error('Invalid username or password')
     }
 

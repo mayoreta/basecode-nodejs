@@ -10,7 +10,7 @@ class DetailUser {
   async detailUser(userId: number): Promise<UserEntity> {
     const user = await this.userRepository.findById(userId)
 
-    if (Object.keys(user).length === 0) {
+    if (!user) {
       throw new Error('User not found')
     }
 

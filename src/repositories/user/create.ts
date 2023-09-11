@@ -23,7 +23,7 @@ class Create {
       name: params.name,
     })
 
-    return toUserEntity(user)
+    return toUserEntity(user) as UserEntity
   }
 }
 

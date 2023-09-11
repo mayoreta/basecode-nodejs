@@ -2,27 +2,28 @@ import Joi from 'joi'
 import UserRepository from '../../../../../repositories/user'
 import User from '../../../../../drivers/sequelize/models/user'
 import UserUsecase from '../../../../../usecases/user'
+import { userDetailSerialize } from '../../../../../helpers/serializers/user/detail'
 
-const paramsDetailUser = Joi.object({
+const detailUserValidator = Joi.object({
   userId: Joi.number().required(),
 })
 
 const detailUserController = async (req: any, res: any, next: any) => {
   try {
     const { params, user } = req
-    const validated = await paramsDetailUser.validateAsync({
+    const { userId } = await detailUserValidator.validateAsync({
       userId: params?.userId || user.aud,
     })
 
     const userRepository = new UserRepository(User)
     const userUsecase = new UserUsecase(userRepository)
 
-    const result = await userUsecase.detailUser(validated?.userId)
+    const result = await userUsecase.detailUser(userId)
 
     const response: HttpResponse = {
       message: 'OK',
       meta: null,
-      data: result,
+      data: await userDetailSerialize(result),
     }
 
     res.send(response)

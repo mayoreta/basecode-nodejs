@@ -3,7 +3,7 @@ import UserRepository from '../../../../../repositories/user'
 import User from '../../../../../drivers/sequelize/models/user'
 import UserUsecase from '../../../../../usecases/user'
 
-const paramsLogin = Joi.object({
+const loginValidator = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
 })
@@ -11,14 +11,14 @@ const paramsLogin = Joi.object({
 const loginController = async (req: any, res: any, next: any) => {
   try {
     const { body } = req
-    const validated = await paramsLogin.validateAsync(body)
+    const { username, password } = await loginValidator.validateAsync(body)
 
     const userRepository = new UserRepository(User)
     const userUsecase = new UserUsecase(userRepository)
 
     const result = await userUsecase.login({
-      username: validated.username,
-      password: validated.password,
+      username,
+      password,
     })
 
     const response: HttpResponse = {

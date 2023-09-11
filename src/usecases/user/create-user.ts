@@ -24,7 +24,7 @@ class CreateUser {
 
   async createUser(params: ParamsCreateUser): Promise<ResultCreateUser> {
     const userExists = await this.userRepository.findByUsername(params.username)
-    if (Object.keys(userExists).length > 0) {
+    if (userExists) {
       throw new Error('User already exists')
     }
 

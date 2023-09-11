@@ -2,6 +2,12 @@ import { Op } from 'sequelize'
 import type User from '../../drivers/sequelize/models/user'
 import { toUserEntity } from '../../entities/user'
 
+type ParamsFindUser = {
+  name?: string
+  page: number
+  perPage: number
+}
+
 class Find {
   userSqlModel: typeof User
 
@@ -10,11 +16,7 @@ class Find {
   }
 
   async find(
-    params: {
-      name?: string
-      page: number
-      perPage: number
-    } = { page: 1, perPage: 20 },
+    params: ParamsFindUser = { page: 1, perPage: 20 },
   ): Promise<[Meta, UserEntity[]]> {
     const conditions: any = {}
 
@@ -24,9 +26,13 @@ class Find {
 
     const { rows, count } = await this.userSqlModel.findAndCountAll({
       where: conditions,
+      limit: params.perPage,
+      offset: params.page > 1 ? (params.page - 1) * params.perPage : 0,
     })
 
-    const users: UserEntity[] = rows.map((user) => toUserEntity(user))
+    const users: UserEntity[] = rows.map(
+      (user) => toUserEntity(user) as UserEntity,
+    )
 
     return [
       {

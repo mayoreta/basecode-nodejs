@@ -10,16 +10,18 @@ declare global {
   }
 }
 
-export const toUserEntity = (userModel: User | null): UserEntity => {
-  const user: UserEntity = {}
-
+export const toUserEntity = (userModel: User | null): UserEntity | null => {
   if (userModel) {
-    user.id = userModel.id
-    user.username = userModel.username
-    user.password = userModel.password
-    user.name = userModel.name
-    user.refId = userModel.refId
+    const user: UserEntity = {
+      id: userModel.id,
+      username: userModel.username,
+      password: userModel.password,
+      name: userModel.name,
+      refId: userModel.refId,
+    }
+
+    return user
   }
 
-  return user
+  return null
 }

@@ -8,7 +8,7 @@ class FindByUsername {
     this.userSqlModel = userSqlModel
   }
 
-  async findByUsername(username: string): Promise<UserEntity> {
+  async findByUsername(username: string): Promise<UserEntity | null> {
     const userData = await this.userSqlModel.findOne({ where: { username } })
 
     return toUserEntity(userData)
