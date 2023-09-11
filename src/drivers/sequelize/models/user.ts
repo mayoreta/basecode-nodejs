@@ -21,6 +21,18 @@ class User extends Model {
     allowNull: false,
   })
   name!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  username!: string
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  password!: string
 }
 
 export = User
