@@ -1,30 +1,23 @@
-import findById from './find-by-id'
-import findByName from './find-by-name'
-import findByRefId from './find-by-ref-id'
 import { Mixin } from 'ts-mixer'
+
 import type User from '../../drivers/sequelize/models/user'
-import type Client from '../../drivers/sequelize/models/client'
-import type Device from '../../drivers/sequelize/models/device'
+import findById from './find-by-id'
+import find from './find'
+import findByUsername from './find-by-username'
+import create from './create'
 
 class UserRepository extends Mixin(
   class {},
-  findByName,
-  findByRefId,
+  find,
+  findByUsername,
   findById,
+  create,
 ) {
   userSqlModel: typeof User
-  clientSqlModel: typeof Client
-  deviceSqlModel: typeof Device
 
-  constructor(
-    userSqlModel: typeof User,
-    clientSqlModel: typeof Client,
-    deviceSqlModel: typeof Device,
-  ) {
+  constructor(userSqlModel: typeof User) {
     super()
     this.userSqlModel = userSqlModel
-    this.deviceSqlModel = deviceSqlModel
-    this.clientSqlModel = clientSqlModel
   }
 }
 

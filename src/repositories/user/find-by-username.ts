@@ -1,18 +1,18 @@
 import User from '../../drivers/sequelize/models/user'
 import { toUserEntity } from '../../entities/user'
 
-class FindById {
+class FindByUsername {
   userSqlModel: typeof User
 
   constructor(userSqlModel: typeof User) {
     this.userSqlModel = userSqlModel
   }
 
-  async findById(id: number): Promise<UserEntity | null> {
-    const userData = await this.userSqlModel.findOne({ where: { id } })
+  async findByUsername(username: string): Promise<UserEntity | null> {
+    const userData = await this.userSqlModel.findOne({ where: { username } })
 
     return toUserEntity(userData)
   }
 }
 
-export = FindById
+export = FindByUsername

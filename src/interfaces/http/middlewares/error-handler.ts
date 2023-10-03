@@ -29,13 +29,6 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
         message: err,
       })
       break
-    case typeof err === 'object':
-      errorResponse = res.status(status || 400).json({
-        version,
-        status: false,
-        message,
-      })
-      break
     case err.isJoi:
       status = 400
       data = err.data || ''
@@ -45,6 +38,13 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
         code: status || 500,
         message,
         data,
+      })
+      break
+    case typeof err === 'object':
+      errorResponse = res.status(status || 400).json({
+        version,
+        status: false,
+        message,
       })
       break
     default:
