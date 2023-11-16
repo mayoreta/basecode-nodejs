@@ -1,6 +1,10 @@
-import { version as appVersion } from '../../../../package.json'
+import git from 'git-rev-sync'
+import moment from 'moment-timezone'
 
-const version = `v${appVersion}`
+const version = `${git.branch()}_${git.long()}_${git.message()}`
+const updatedAt = moment(git.date())
+  .tz('Asia/Jakarta')
+  .format('DD/MM/YYYY HH:mm:ss Z')
 
 const errorHandler = (err: any, req: any, res: any, next: any) => {
   const { message } = err
@@ -8,19 +12,21 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
   let data = ''
   let errorResponse
 
+  req.errorData = {
+    code: err?.status || 400,
+    message: err?.message || null,
+    errors: err?.errors,
+    updated_at: updatedAt,
+    version,
+    stack: err?.stack || {},
+  }
+
   switch (true) {
     case typeof err === 'string':
       errorResponse = res.status(status || 400).json({
         version,
         status: false,
         message: err,
-      })
-      break
-    case typeof err === 'object':
-      errorResponse = res.status(status || 400).json({
-        version,
-        status: false,
-        message,
       })
       break
     case err.isJoi:
@@ -32,6 +38,13 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
         code: status || 500,
         message,
         data,
+      })
+      break
+    case typeof err === 'object':
+      errorResponse = res.status(status || 400).json({
+        version,
+        status: false,
+        message,
       })
       break
     default:
