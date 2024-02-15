@@ -1,4 +1,6 @@
 import log4js from 'log4js'
+import { name as projectName } from '../../../package.json'
+import { paramCase } from 'change-case'
 
 const logconfig = {
   appenders: {
@@ -9,7 +11,7 @@ const logconfig = {
       secretAccessKey: process.env.CLOUDWATCH_SECRET_ACCESS_KEY || '',
       region: process.env.CLOUDWATCH_REGION || '',
       logGroup: process.env.CLOUDWATCH_LOG_GROUP || '',
-      logStream: 'basecode-nodejs-log',
+      logStream: `${paramCase(projectName)}-log`,
       category: 'service',
     },
     cloudwatchAccess: {
@@ -19,7 +21,7 @@ const logconfig = {
       secretAccessKey: process.env.CLOUDWATCH_SECRET_ACCESS_KEY || '',
       region: process.env.CLOUDWATCH_REGION || '',
       logGroup: process.env.CLOUDWATCH_LOG_GROUP || '',
-      logStream: 'basecode-nodejs-access',
+      logStream: `${paramCase(projectName)}-access`,
       category: 'http',
     },
     service: {

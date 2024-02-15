@@ -12,7 +12,7 @@ type ParamsCreateUser = {
 type ResultCreateUser = {
   accessToken: string
   refreshToken: string
-  user: UserEntity
+  user?: UserEntity | null
 }
 
 class CreateUser {
@@ -40,7 +40,7 @@ class CreateUser {
       expiredInMinute: 60,
       secretKey: '123',
       data: {
-        aud: user.id?.toString() || '-',
+        aud: user?.id?.toString() || '-',
         role: 'USER',
       },
     })
@@ -49,7 +49,7 @@ class CreateUser {
       expiredInMinute: 60 * 24 * 30,
       secretKey: '123',
       data: {
-        aud: user.id?.toString() || '-',
+        aud: user?.id?.toString() || '-',
         role: 'USER',
       },
     })
