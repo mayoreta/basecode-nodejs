@@ -37,6 +37,7 @@
     "log4js-cloudwatch-appender": "^1.1.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
+    "mongoose": "^7.5.3",
     "pg": "^8.11.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",
