@@ -7,6 +7,7 @@
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "build": "npx tsc",
+    "start": "node dist/src/index.js",
     "dev:http": "cross-env INTERFACE=HTTP concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
     "dev:http:internal": "cross-env INTERFACE=HTTP_INTERNAL concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
     "services:local": "concurrently  --names \"HTTP,HTTP_INTERNAL\" -c \"blue,red\" \"npm run dev:http\" \"npm run dev:http:internal\"",
