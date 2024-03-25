@@ -8,7 +8,9 @@ const routers = express.Router()
 
 routers.get('/', (req: any, res: any) =>
   res.send(
-    `API ${capitalCase(projectName)} (http-internal) for ${process.env.NODE_ENV}`,
+    `API ${capitalCase(projectName)} (${process.env.INTERFACE}) for ${
+      process.env.NODE_ENV
+    }`,
   ),
 )
 

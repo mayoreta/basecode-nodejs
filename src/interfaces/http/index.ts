@@ -9,6 +9,8 @@ import { serverLogger } from '../../helpers/logger'
 import rawHeader from './middlewares/raw-header'
 import errorHandler from './middlewares/error-handler'
 import routers from './routes'
+import { name as projectName } from '../../../package.json'
+import { capitalCase } from 'change-case'
 
 const port = process.env.HTTP_PORT || 3000
 const basePath = process.env.BASE_PATH || '/'
@@ -32,6 +34,13 @@ const run = () => {
   app.use(rawBody)
   app.use(rawHeader)
   app.use(expressUserAgent.express())
+  app.get('/', (req: any, res: any) =>
+    res.send(
+      `API ${capitalCase(projectName)} (${process.env.INTERFACE}) for ${
+        process.env.NODE_ENV
+      }`,
+    ),
+  )
   app.use(basePath, routers)
   app.use((req, res, next) => {
     next(httpErrors.NotFound())
