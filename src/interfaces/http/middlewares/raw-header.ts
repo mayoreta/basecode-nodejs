@@ -28,10 +28,12 @@ const rawHeader = (req: any, res: any, next: any) => {
     const type = decoded?.type || '-'
     const userType = decoded?.userType || '-'
     const userId = decoded?.userId || '-'
+    const exp = decoded?.exp || '-'
     vRawHeader['x-app-device-id'] = deviceId
-    vRawHeader['x-app-type'] = type
+    vRawHeader['x-app-token-type'] = type
     vRawHeader['x-app-user-type'] = userType
     vRawHeader['x-app-user-id'] = userId
+    vRawHeader['x-app-token-exp'] = exp
 
     req.rawHeader = vRawHeader
     return next()
