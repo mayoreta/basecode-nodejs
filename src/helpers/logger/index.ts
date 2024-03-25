@@ -147,7 +147,7 @@ const serverLogger = log4js.connectLogger(log4js.getLogger('access'), {
         status: ':status',
         method: ':method',
         responseTime: `${req?.time || '-'}ms`,
-        type: req?.rawHeader?.['x-app-typee'] || '-',
+        type: req?.rawHeader?.['x-app-type'] || '-',
         deviceId: req?.rawHeader?.['x-app-device-id'] || '-',
         userId: req?.rawHeader?.['x-app-user-id'] || '-',
         userType: req?.rawHeader?.['x-app-user-type'] || '-',
