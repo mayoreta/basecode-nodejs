@@ -115,8 +115,17 @@ const appLogger: IAppLogger = {
       action,
       data: message || {},
     }
-    if (['production', 'staging', 'dev'].includes(String(process.env.NODE_ENV)))
+
+    if (
+      ['production', 'staging', 'dev'].includes(String(process.env.NODE_ENV))
+    ) {
       newData = JSON.stringify(newData)
+    }
+
+    if (['local'].includes(String(process.env.NODE_ENV))) {
+      newData = JSON.stringify(newData, null, 2)
+    }
+
     if (type === 'trace') {
       logger.trace(newData)
     } else if (type === 'debug') {
