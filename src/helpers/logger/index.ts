@@ -108,17 +108,12 @@ const appLogger: IAppLogger = {
     appLogger.push('fatal', action, message)
   },
   push: (type: any, action: any, message: any) => {
-    let newMessage: any = { message }
-    if (typeof message === 'object') {
-      newMessage = JSON.stringify(message)
-    }
-
     let newData: any = {
       time: new Date(),
       type,
       interface: process.env.INTERFACE,
       action,
-      data: newMessage,
+      data: message || {},
     }
     if (['production', 'staging', 'dev'].includes(String(process.env.NODE_ENV)))
       newData = JSON.stringify(newData)
