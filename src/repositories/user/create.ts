@@ -1,6 +1,5 @@
-import { UserModelMongo } from '../../drivers/mongoose/models/user'
 import User from '../../drivers/sequelize/models/user'
-import { toUserEntity, toUserEntityMongo } from '../../entities/user'
+import { toUserEntity } from '../../entities/user'
 
 type ParamsCreateUser = {
   username: string
@@ -11,14 +10,9 @@ type ParamsCreateUser = {
 
 class Create {
   userSqlModel: typeof User
-  userModelMongo: typeof UserModelMongo
 
-  constructor(
-    userSqlModel: typeof User,
-    userModelMongo: typeof UserModelMongo,
-  ) {
+  constructor(userSqlModel: typeof User) {
     this.userSqlModel = userSqlModel
-    this.userModelMongo = userModelMongo
   }
 
   async create(params: ParamsCreateUser): Promise<UserEntity | null> {
@@ -30,12 +24,6 @@ class Create {
     })
 
     return toUserEntity(user)
-  }
-
-  async createMongo(id: string): Promise<UserEntity | null> {
-    const user = await this.userModelMongo.findById(id)
-
-    return toUserEntityMongo(user)
   }
 }
 

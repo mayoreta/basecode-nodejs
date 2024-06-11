@@ -16,7 +16,7 @@
     "db:migrate:rollback:all": "cross-env SQL_MIGRATION_MODE=MIGRATOR node_modules/.bin/sequelize db:migrate:undo:all --config dist/src/drivers/sequelize/database.js",
     "generate:migration": "cross-env SQL_MIGRATION_MODE=GENERATOR node_modules/.bin/sequelize migration:generate --config src/drivers/sequelize/database.ts --name"
   },
-  "author": "CAZH Engineer",
+  "author": "MIKA Engineer",
   "license": "ISC",
   "dependencies": {
     "@lukeed/uuid": "^2.0.1",
@@ -38,7 +38,6 @@
     "log4js-cloudwatch-appender": "^1.1.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
-    "mongoose": "^7.5.3",
     "pg": "^8.11.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",

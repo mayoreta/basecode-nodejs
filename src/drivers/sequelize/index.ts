@@ -16,6 +16,12 @@ const connection = new Sequelize({
     min: 0,
     idle: 10000,
   },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
   port: Number(process.env.SQL_DB_PORT || 5432),
   models: [User, Client, Device],
 })

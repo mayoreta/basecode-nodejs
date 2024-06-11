@@ -1,4 +1,4 @@
-require('dotenv').config()
+import 'dotenv/config'
 
 const dbConfigs = {
   local: {
@@ -9,6 +9,12 @@ const dbConfigs = {
     port: Number(process.env.SQL_DB_PORT || 5432),
     dialect: 'postgres',
     logging: process.env.SQL_DB_DEBUG === 'true',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   dev: {
     username: process.env.SQL_DB_USERNAME,
@@ -18,6 +24,12 @@ const dbConfigs = {
     port: Number(process.env.SQL_DB_PORT || 5432),
     dialect: 'postgres',
     logging: process.env.SQL_DB_DEBUG === 'true',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   test: {
     username: process.env.SQL_DB_USERNAME,
@@ -27,6 +39,12 @@ const dbConfigs = {
     port: Number(process.env.SQL_DB_PORT || 5432),
     dialect: 'postgres',
     logging: process.env.SQL_DB_DEBUG === 'true',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   staging: {
     username: process.env.SQL_DB_USERNAME,
@@ -36,6 +54,12 @@ const dbConfigs = {
     port: Number(process.env.SQL_DB_PORT || 5432),
     dialect: 'postgres',
     logging: process.env.SQL_DB_DEBUG === 'true',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
   production: {
     username: process.env.SQL_DB_USERNAME,
@@ -50,6 +74,12 @@ const dbConfigs = {
       min: 0,
       acquire: 30000,
       idle: 10000,
+    },
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
     },
   },
 }

@@ -5,8 +5,8 @@ import UserUsecase from '../../../../../usecases/user'
 
 const createUserValidator = Joi.object({
   username: Joi.string().required(),
-  password: Joi.string().required(),
   name: Joi.string().required(),
+  password: Joi.string().required(),
 })
 
 const createUserController = async (req: any, res: any, next: any) => {

@@ -5,7 +5,7 @@ import authentication from '../../middlewares/authentication'
 const routers = () => {
   const router = express.Router()
 
-  router.post('/', userController.createUserController)
+  router.post('/register', userController.registerController)
   router.post('/login', userController.loginController)
   router.get(
     '/me',

@@ -1,5 +1,5 @@
-import createUserController from './create'
+import registerController from './register'
 import detailUserController from './detail'
 import loginController from './login'
 
-export = { createUserController, detailUserController, loginController }
+export = { registerController, detailUserController, loginController }
