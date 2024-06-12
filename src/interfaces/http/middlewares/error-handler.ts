@@ -33,7 +33,7 @@ const errorHandler = (err: any, req: any, res: any, next: any) => {
       status = 400
       data = err.data || ''
 
-      errorResponse = res.send({
+      errorResponse = res.status(status || 500).json({
         version,
         code: status || 500,
         message,

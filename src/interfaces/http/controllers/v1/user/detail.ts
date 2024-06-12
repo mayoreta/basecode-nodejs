@@ -20,10 +20,12 @@ const detailUserController = async (req: any, res: any, next: any) => {
 
     const result = await userUsecase.detailUser(userId)
 
+    const serializedData = await userDetailSerialize(result)
+
     const response: HttpResponse = {
       message: 'OK',
       meta: null,
-      data: await userDetailSerialize(result),
+      data: serializedData,
     }
 
     res.send(response)

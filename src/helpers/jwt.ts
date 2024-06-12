@@ -1,4 +1,4 @@
-import JWT, { JwtPayload } from 'jsonwebtoken'
+import JWT, { JwtPayload, SignOptions } from 'jsonwebtoken'
 
 type JwtData = {
   aud: string
@@ -17,7 +17,7 @@ type ParamsValidateToken = {
 }
 
 export const generateToken = async (params: ParamsGenerateToken) => {
-  const options = {
+  const options: SignOptions = {
     expiresIn: `${params.expiredInMinute}m`,
   }
 

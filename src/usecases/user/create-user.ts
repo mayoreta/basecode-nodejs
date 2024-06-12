@@ -12,7 +12,7 @@ type ParamsCreateUser = {
 type ResultCreateUser = {
   accessToken: string
   refreshToken: string
-  user?: UserEntity | null
+  user: UserEntity
 }
 
 class CreateUser {
@@ -29,12 +29,17 @@ class CreateUser {
     }
 
     const refId = shortid.generate()
+    const hashPassword = await hashingPassword(params.password)
     const user = await this.userRepository.create({
       name: params.name,
       refId,
-      password: await hashingPassword(params.password),
+      password: hashPassword,
       username: params.username,
     })
+
+    if (!user) {
+      throw new Error('Create user failed')
+    }
 
     const accessToken = await generateToken({
       expiredInMinute: 60,
